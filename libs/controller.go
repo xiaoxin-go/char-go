@@ -29,8 +29,6 @@ type Restfuller interface {
 
 type Instance interface {
 	GetId() int
-	SetUpdatedBy(string)
-	SetCreatedBy(string)
 }
 
 type Controller struct {

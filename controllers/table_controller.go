@@ -5,13 +5,17 @@ import (
 	"meal-server/models"
 )
 
-var TableController libs.Restfuller
+type TableController struct {
+	libs.Controller
+}
 
-func init() {
-	controller := &libs.Controller{}
+func NewTableController() libs.Restfuller {
+	controller := &TableController{}
 	controller.ModelFunc = func() libs.Instance {
 		return new(models.TTable)
 	}
-	controller.ListFunc
-	TableController = controller
+	controller.ListFunc = func() any {
+		return new([]*models.TTable)
+	}
+	return controller
 }
