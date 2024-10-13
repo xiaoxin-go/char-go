@@ -1,16 +1,19 @@
 package database
 
 import (
+	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
+	"meal-server/config"
 	"time"
 )
 
 var DB *gorm.DB
 
-func ConnectDatabase() {
-	dsn := "user:password@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local" // 修改为你的数据库 DSN
+func ConnectDatabase(conf config.Mysql) {
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		conf.User, conf.Password, conf.Host, conf.Port, conf.Name) // 修改为你的数据库 DSN
 	var err error
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {

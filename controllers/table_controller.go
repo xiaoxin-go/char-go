@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/gin-gonic/gin"
 	"meal-server/libs"
 	"meal-server/models"
 )
@@ -18,4 +19,9 @@ func NewTableController() libs.Restfuller {
 		return new([]*models.TTable)
 	}
 	return controller
+}
+
+func (c *TableController) Update(ctx *gin.Context) {
+	libs.HttpServerError(ctx, "不支持更新")
+	return
 }

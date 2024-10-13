@@ -6,6 +6,5 @@ import (
 )
 
 func TableRoutes(r *gin.RouterGroup) {
-	table := r.Group("table")
-	RegisterRestRoutes(table, controllers.NewTableController())
+	RegisterRestRoutes(r, "table", controllers.NewTableController())
 }

@@ -7,16 +7,18 @@ import (
 )
 
 type Config struct {
-	Database struct {
-		User     string `json:"user"`
-		Password string `json:"password"`
-		Host     string `json:"host"`
-		Port     int    `json:"port"`
-		Name     string `json:"name"`
-	} `json:"database"`
-	Server struct {
+	Database Mysql `json:"database"`
+	Server   struct {
 		Port int `json:"port"`
 	} `json:"server"`
+}
+
+type Mysql struct {
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Host     string `json:"host"`
+	Port     int    `json:"port"`
+	Name     string `json:"name"`
 }
 
 var AppConfig Config

@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"github.com/gin-gonic/gin"
 	"meal-server/libs"
 	"meal-server/models"
+	"meal-server/services"
 )
 
 type OrderController struct {
@@ -18,4 +20,25 @@ func NewOrderController() libs.Restfuller {
 		return new([]*models.TOrder)
 	}
 	return controller
+}
+
+func (c *OrderController) Create(ctx *gin.Context) {
+	req := struct {
+		TableId string `json:"table_id"`
+	}{}
+	if e := ctx.ShouldBindJSON(&req); e != nil {
+		libs.HttpParamsError(ctx, "参数校验失败, err: %s", e.Error())
+		return
+	}
+	if e := services.CreateOrder(req.TableId); e != nil {
+		libs.HttpServerError(ctx, e.Error())
+		return
+	}
+	libs.HttpSuccess(ctx, nil, "订单创建成功")
+}
+func (c *OrderController) Update(ctx *gin.Context) {
+	libs.HttpParamsError(ctx, "不能更新订单信息")
+}
+func (c *OrderController) Delete(ctx *gin.Context) {
+	libs.HttpParamsError(ctx, "不能删除订单信息")
 }

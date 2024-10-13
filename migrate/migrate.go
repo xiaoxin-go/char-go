@@ -11,8 +11,8 @@ func AutoMigrate() {
 		models.TTable{},
 		models.TCart{},
 		models.TDish{},
-		models.TCartDish{},
 		models.TOrder{},
+		models.TOrderDish{},
 	); e != nil {
 		fmt.Println(e.Error())
 	}
